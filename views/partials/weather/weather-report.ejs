@@ -1,0 +1,18 @@
+<%
+    var showHideClass = ((weather !== null || error !== null) ? 'show' : 'hide');
+    var successErrorClass = ((weather !== null) ? 'alert-success' : 'alert-danger');
+%>
+<div class="row <%=showHideClass%> <%=successErrorClass%> text-uppercase text-center">
+    <div class="col-xs-12">
+        <% if(weather !== null){ %>
+            <p>
+                <%= weather %>
+            </p>
+            <% } %>
+            <% if(error !== null){ %>
+                <p class="bg-error">
+                    <%= error %>
+                </p>
+            <% } %>
+    </div>
+</div>	

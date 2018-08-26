@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({
 app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
-	res.render('index', {weather: null, error: null});
+	res.render('pages/weather/index', {weather: null, error: null});
 });
 
 app.post('/', function(req, res) {
@@ -26,20 +26,20 @@ app.post('/', function(req, res) {
 	let url = `http://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&units=imperial&appid=${apiKey}`
 	request(url, function(err, response, body) {
 		if (err) {
-			res.render('index', {
+			res.render('pages/weather/index', {
 				weather: null,
 				error: 'Error, please try again'
 			});
 		} else {
 			let weather = JSON.parse(body)
 			if (weather.main == undefined) {
-				res.render('index', {
+				res.render('pages/weather/index', {
 					weather: null,
 					error: 'Error, please try again'
 				});
 			} else {
 				let weatherText = `It's ${fahrenheitToCelsius(weather.main.temp).toFixed(2)} degrees Celcius in ${city}, ${country}!`;
-				res.render('index', {
+				res.render('pages/weather/index', {
 					weather: weatherText,
 					error: null
 				});
@@ -49,5 +49,5 @@ app.post('/', function(req, res) {
 })
 
 app.listen(3000, function() {
-	console.log('Example app listening on port 3000!')
+	console.log('Live at port 3000!');
 });
