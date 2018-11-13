@@ -10,7 +10,11 @@
     "compile": "node-sass sass/main.scss public/css/style.css",
     "prefix": "postcss public/css/style.css --use autoprefixer -o public/css/style.css",
     "compress": "node-sass public/css/style.css public/css/style.css --output-style compressed",
-    "build": "npm-run-all compile prefix compress",
+    "build-css": "npm-run-all compile prefix compress",
+    "fix-js-style": "standard --fix",
+    "uglify-js": "uglifyjs-folder client-scripts --output public/js/script.min.js --pattern '**/*.js,!**/*min.js' --config-file uglify-js-config.json",
+    "build-js": "npm-run-all fix-js-style uglify-js",
+    "build": "npm-run-all build-css build-js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Saddham Pathan",
@@ -18,18 +22,21 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "bootstrap-sass": "^3.3.7",
-    "country-data": "0.0.31",
+    "compression": "^1.7.3",
+    "country-list": "^2.1.0",
     "ejs": "^2.6.1",
-    "express": "^4.16.3",
+    "express": "^4.16.4",
     "fahrenheit-to-celsius": "^1.0.0",
-    "jasmine-utils": "^0.6.0",
     "kelvin-to-celsius": "^1.1.0",
-    "live-server": "^1.2.0",
-    "node-sass": "^4.9.3"
+    "live-server": "^1.2.0"
   },
   "devDependencies": {
-    "autoprefixer": "^9.1.1",
+    "autoprefixer": "^9.3.1",
+    "jasmine-utils": "^0.6.0",
+    "node-sass": "^4.10.0",
     "npm-run-all": "^4.1.3",
-    "postcss-cli": "^6.0.0"
+    "postcss-cli": "^6.0.1",
+    "standard": "^12.0.1",
+    "uglifyjs-folder": "^1.5.1"
   }
 }
